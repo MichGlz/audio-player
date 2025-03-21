@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="custom-audio.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      overflow-x: hidden;
+    }
+    header {
+      width: 100%;
+      height: fit-content;
+      padding: 0.5rem 2rem;
+      background-color: #d7fcfc;
+    }
+    nav {
+      width: 100%;
+      background-color: #ffe4c4;
+      border-radius: 0.75rem;
+    }
+    nav ul {
+      display: flex;
+      justify-content: space-around;
+      list-style: none;
+      padding-block: 1rem;
+    }
+    section {
+      width: 100%;
+      min-height: 100vh;
+      background-color: #dbf1c5;
+      border-top: solid 1px #fa8072;
+      position: relative;
+    }
+    .section-1{
+        min-height: 90vh;
+    }    
+    footer {
+      width: 100%;
+      height: 50vh;
+      border-top: solid 1px #fa8072;
+    }
+    .rose {
+      background-color: #bc8f8f;
+    }
+    .blue {
+      background-color: #b7b7ff;
+    }
+    .orange {
+      background-color: #fdebc9;
+    }
+    .yellow {
+      background-color: #fdfdc6;
+    }
+    .background,
+    .frontground {
+      position: absolute;
+      inset: 0;
+    }
+    .midleground {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      padding-top: 10%;
+      width: 100%;
+    }
+    .wrapper {
+      width: 80vw;
+      max-width: 800px;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1rem;
+      justify-content: center;
+      align-items: center;
+    }
+    .square-small {
+      position: absolute;
+      width: 10rem;
+      aspect-ratio: 1;
+      background-color: #b7b7ff;
+    }
+    .rt {
+      top: 1rem;
+      right: 1rem;
+    }
+    .lt {
+      top: 1rem;
+      left: 1rem;
+    }
+    .rb {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    .lb {
+      bottom: 1rem;
+      left: 1rem;
+    }
+    .rectangle {
+      width: 20rem;
+      aspect-ratio: 4/3;
+      background-color: beige;
+      border: solid 1px #000;
+      position: absolute;
+      top: 50%;
+      z-index: 1;
+    }
+    
+    .right {
+      right: 20%;
+      z-index: 0;
+    }
+    .left {
+      left: 20%;
+    }
+    .shape-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding-top: 10%;
+      width: 100%;
+      height: fit-content;
+    }
+    .shape{
+      --shape-width: 10rem;
+      width: var(--shape-width);
+      height: var(--shape-width);
+      background-color: #6161cd;
+      transform-origin: center;
+      
+    }    
+    .tall{
+      --radious: var(--shape-width);
+      height: calc(var(--shape-width) * 2);
+    }
+    .dot{
+      border-radius: 100%;
+    }
+    .quarter-circle{
+      border-radius: 100% 0 0 0;
+    }
+    .ballon{
+      border-radius: 50% 50% 50% 0;
+    }
+    .diagonal{
+      border-radius: 50% 0 50% 0;
+    }
+    .cornner{     
+      border-radius: var(--radious) 0 0 0;
+    }
+    .two-cornner{           
+      border-radius: var(--radious) 0 var(--radious) 0;
+    }
+    .half{
+      --radious: calc(var(--shape-width) * 0.5);
+    }
+    .flip-horizontal{
+      transform:scaleX(-1);
+    }
+    .flip-vertical{
+      transform:scaleY(-1);
+    }
+    .shape-wrapper{
+      position: relative;
+      transform-origin: center;
+      width: fit-content;
+      height: fit-content;
+    }    
+    .rotate-90{
+      transform:rotate(90deg);
+    }
+    .rotate-180{
+      transform:rotate(180deg);
+    }
+    .rotate-270{
+      transform:rotate(270deg);
+    }
+    audio-player{
+      display: block;
+      width: 300px;
+      height: 54px;
+    }
+  </style>
+  <body>
+    <header>
+      <nav>
+        <ul class="bg-rose-400">
+          <li>home</li>
+          <li>link 1</li>
+          <li>link 2</li>
+          <li>link 3</li>
+          <li>about</li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section id="sticky-section" class="section-1">
+        <div class="background">
+          <div class="square-small rt"></div>
+          <div class="square-small rb"></div>
+          <div class="square-small lt"></div>
+          <div class="square-small lb"></div>
+        </div>
+        <div class="midleground">
+          <div class="wrapper">
+            <h1>Section 1</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis
+              iste similique quis aliquam deserunt officia tenetur, sed tempore
+              non sunt ipsum aut nesciunt sit pariatur excepturi odio quia ipsa
+              adipisci.
+            </p>
+            <button>click me</button>
+          </div>
+        </div>
+        <div class="frontground">
+          <div class="rectangle left"></div>
+          <div class="rectangle right"></div>
+        </div>
+      </section>
+      <section id="section-2" class="section-2 rose">
+        <div class="shape-container">
+          <div class="shape-wrapper"> 
+            <div class="shape"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape dot"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape quarter-circle"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape ballon"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape diagonal"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape tall"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape tall cornner"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape tall cornner half"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape tall two-cornner"></div>
+          </div>
+          <div class="shape-wrapper"> 
+            <div class="shape tall two-cornner half"></div>
+          </div>
+        </div>
+      </section>
+      <section class="section-3 blue">
+        <audio-player src="post-45125.mp3,post-53569.mp3" audio-label="Listen Now" bg-color="#232323" draggable ></audio-player>
+      </section>
+      <section class="section-4 orange"></section>
+      <section class="section-5 yellow"></section>
+    </main>
+    <footer>
+      
+    </footer>
+  </body>
+  <script>
+    // use a script tag or an external JS file
+    document.addEventListener("DOMContentLoaded", (event) => {
+      gsap.registerPlugin(ScrollTrigger);
+      // gsap code here!
+      const midleground = document.querySelector(".midleground");
+      gsap.to(".midleground", {
+          scrollTrigger: {
+            trigger: ".section-2",
+            start: "top bottom",
+            end: "top top",            
+            pin: ".midleground",
+            markers: true,
+          },
+        });
+        gsap.to(".lb", {
+            y:window.innerHeight * -1,
+          scrollTrigger: {
+            trigger: ".section-2",
+            start: "top bottom",
+            end: "top 10%",            
+            scrub: 0.3,
+            markers: true,
+          },
+        });
+      const rectangles = document.querySelectorAll(".rectangle");
+      rectangles.forEach((rectangle) => {
+        const direction = rectangle.classList.contains("left") ? -1 : 1;
+        gsap.to(rectangle, {
+          x: 800 * direction,
+          duration: 5,
+          scrollTrigger: {
+            trigger: ".section-2",
+            start: "top bottom",
+            end: "top -50%",
+            scrub: 0.3,
+            pin: rectangle,
+            markers: true,
+          },
+        });
+      });
+    });
+      
+  </script>
+</html>
+
+
+
